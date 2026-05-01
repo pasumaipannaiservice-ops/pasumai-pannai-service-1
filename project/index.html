@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>PASUMAI PANNAI SERVICE</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: #f5f5f5;
+        }
+
+        /* ===== HERO SLIDER ===== */
+        .hero {
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transform: scale(1.1);
+            transition: opacity 1s ease, transform 5s ease;
+        }
+
+        .slide.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            top: 0;
+            left: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            color: white;
+            text-align: center;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .hero h1 {
+            font-size: 42px;
+        }
+
+        .btn {
+            padding: 12px 20px;
+            background: green;
+            color: white;
+            border-radius: 25px;
+            text-decoration: none;
+        }
+
+        .lang-btn {
+            margin: 5px;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* Slider buttons */
+        .prev, .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.5);
+            color: white;
+            border: none;
+            font-size: 30px;
+            padding: 10px;
+            cursor: pointer;
+            z-index: 3;
+        }
+
+        .prev { left: 10px; }
+        .next { right: 10px; }
+
+        .prev:hover, .next:hover {
+            background: green;
+        }
+
+        /* ===== PRODUCTS ===== */
+        .section {
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .section h2 {
+            color: green;
+            margin-bottom: 20px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 40px 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+            font-size: 18px;
+            font-weight: bold;
+            color: green;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* ===== CONTACT ===== */
+        .contact {
+            background: #e8f5e9;
+            padding: 40px;
+            text-align: center;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: #111;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+    </style>
+
+    <script>
+        function setLanguage(lang) {
+            document.querySelectorAll("[data-en]").forEach(el => {
+                el.innerText = el.getAttribute("data-" + lang);
+            });
+        }
+
+        let slides, index = 0;
+
+        function showSlide(i) {
+            slides.forEach(slide => slide.classList.remove("active"));
+            slides[i].classList.add("active");
+        }
+
+        window.onload = function() {
+            slides = document.querySelectorAll(".slide");
+
+            document.querySelector(".next").onclick = () => {
+                index = (index + 1) % slides.length;
+                showSlide(index);
+            };
+
+            document.querySelector(".prev").onclick = () => {
+                index = (index - 1 + slides.length) % slides.length;
+                showSlide(index);
+            };
+
+            setInterval(() => {
+                index = (index + 1) % slides.length;
+                showSlide(index);
+            }, 4000);
+        };
+    </script>
+</head>
+
+<body>
+
+<!-- HERO SLIDER -->
+<div class="hero">
+
+    <div class="slide active" style="background-image: url('images/bg1.jpg')"></div>
+    <div class="slide" style="background-image: url('images/bg2.jpg')"></div>
+    <div class="slide" style="background-image: url('images/bg3.jpg')"></div>
+    <div class="slide" style="background-image: url('images/bg4.jpg')"></div>
+
+    <div class="hero-content">
+        <h1 data-en="PASUMAI PANNAI SERVICE" data-ta="பசுமை பண்ணை சர்வீஸ்">
+            PASUMAI PANNAI SERVICE
+        </h1>
+
+        <p data-en="Fertilizers | Pesticides | Seeds | Cattle Feed"
+           data-ta="உரங்கள் | பூச்சிக்கொல்லிகள் | விதைகள் | மாட்டு தீவனம்">
+        </p>
+
+        <br>
+        <a class="btn" href="https://wa.me/919443910459">Contact</a>
+
+        <br><br>
+        <button class="lang-btn" onclick="setLanguage('en')">English</button>
+        <button class="lang-btn" onclick="setLanguage('ta')">தமிழ்</button>
+    </div>
+
+    <button class="prev">&#10094;</button>
+    <button class="next">&#10095;</button>
+
+</div>
+
+<!-- PRODUCTS -->
+<div class="section">
+    <h2 data-en="Our Products" data-ta="எங்கள் பொருட்கள்">Our Products</h2>
+
+    <div class="cards">
+        <div class="card" data-en="🌱 Fertilizers" data-ta="🌱 உரங்கள்">🌱 Fertilizers</div>
+        <div class="card" data-en="🧪 Pesticides" data-ta="🧪 பூச்சிக்கொல்லிகள்">🧪 Pesticides</div>
+        <div class="card" data-en="🌾 Seeds" data-ta="🌾 விதைகள்">🌾 Seeds</div>
+        <div class="card" data-en="🐄 Cattle Feed" data-ta="🐄 மாட்டு தீவனம்">🐄 Cattle Feed</div>
+    </div>
+</div>
+
+<!-- CONTACT -->
+<div class="contact">
+    <h2 data-en="Contact Us" data-ta="தொடர்பு கொள்ள">Contact Us</h2>
+    <p>📍 Thonganoor, Chintalpadi, PR Patti, Dharmapuri - 635302</p>
+    <p>📞 9443910459 / 9025110459</p>
+</div>
+
+<!-- FOOTER -->
+<footer>
+    <p data-en="© 2026 PASUMAI PANNAI SERVICE"
+       data-ta="© 2026 பசுமை பண்ணை சர்வீஸ்">
+    </p>
+</footer>
+
+</body>
+</html>
